@@ -1,0 +1,58 @@
+---
+import Hr from "./Hr.astro";
+import LinkButton from "./LinkButton.astro";
+import Socials from "./Socials.astro";
+
+const currentYear = new Date().getFullYear();
+
+export interface Props {
+  noMarginTop?: boolean;
+}
+
+const { noMarginTop = false } = Astro.props;
+---
+
+<footer class={`${noMarginTop ? "" : "mt-auto"}`}>
+  <div class="left">
+    Contáctame sin miedo para bugs o sugerencias :)
+  </div>
+  <Hr noPadding />
+  <div class="credits">
+    Based on <LinkButton className="hover:text-skin-accent underline underline-offset-4 decoration-dashed" href="https://github.com/satnaing/astro-paper"> Astro-Paper </LinkButton> by Sat Naing
+  </div>
+  <div class="footer-wrapper">
+    <Socials centered />
+    <div class="copyright-wrapper">
+      <span>Copyright &#169; {currentYear}</span>
+      <span class="separator">&nbsp;|&nbsp;</span>
+      <span>All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    @apply w-full;
+  }
+  .footer-wrapper {
+    @apply flex flex-col sm:flex-row-reverse justify-between items-center;
+  }
+  .link-button {
+    @apply p-2 my-1 hover:rotate-6;
+  }
+  .link-button svg {
+    @apply scale-125;
+  }
+  .copyright-wrapper {
+    @apply my-2 flex flex-col sm:flex-row items-center whitespace-nowrap;
+  }
+  .separator {
+    @apply hidden sm:inline;
+  }
+  .credits {
+    @apply pt-2 pb-4 text-right;
+  }
+  .left {
+    @apply text-left py-4 font-bold italic;
+  }
+</style>

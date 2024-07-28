@@ -1,0 +1,30 @@
+---
+export interface Props {
+  href: string;
+  className?: string;
+  ariaLabel?: string;
+  title?: string;
+  tabindex?: string;
+  color?: string;
+}
+
+const { href, className, ariaLabel, title, tabindex, color } = Astro.props;
+const _color = color || "rgb(var(--color-accent))";
+---
+
+<a
+  type="button"
+  href={href}
+  tabindex={tabindex}
+  class={`group ${className}`}
+  aria-label={ariaLabel}
+  title={title}
+>
+  <slot />
+</a>
+
+<style define:vars={{color: _color}}>
+  a {
+    @apply hover:text-[color:var(--color)];
+  }
+</style>

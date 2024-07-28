@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# Push changes to GitHub
+git add -A
+git commit -m "$(date +'%d-%m-%Y -- %H:%M')"
+git push
+
+# Compile
+npm run astro build
+
+# Copy files to raspberry
+export SSH_USER=elpekenin
+export SSH_HOST=elraspberrin
+export SSH_PATH=~/40dex-rs/web/static/dist
+ssh $SSH_USER@$SSH_HOST "rm ${SSH_PATH}/*"
+scp -r dist/* $SSH_USER@$SSH_HOST:$SSH_PATH
